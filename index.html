@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Track expenses, manage savings, and monitor your financial goals"/>
+<meta name="theme-color" content="#06b6d4"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="Finance Tracker"/>
+<link rel="manifest" href="/manifest.json"/>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='43' fill='%2306b6d4'/%3E%3Ctext x='96' y='135' font-size='105' text-anchor='middle' fill='white'%3E💰%3C/text%3E%3C/svg%3E"/>
 <title>Finance Tracker</title>
 <link rel="preconnect" href="https://rffarfauykscxnvgmous.supabase.co"/>
 <link rel="preconnect" href="https://cdn.jsdelivr.net"/>
@@ -68,6 +75,7 @@ input,select{width:100%;padding:10px 14px;background:#fff;border:1.5px solid var
     <div class="nav-item" onclick="goTo('sav')" data-page="sav"><span class="nav-icon">💰</span>Savings</div>
     <div class="nav-item" onclick="goTo('gold')" data-page="gold"><span class="nav-icon">🪙</span>Gold</div>
     <div class="nav-item" onclick="goTo('storage')" data-page="storage" id="navStorage" style="display:none"><span class="nav-icon">💾</span>Storage</div>
+    <div class="nav-item" onclick="goTo('analytics')" data-page="analytics" id="navAnalytics" style="display:none"><span class="nav-icon">📊</span>Analytics</div>
     <div class="nav-item" onclick="goTo('users')" data-page="users" id="navU" style="display:none"><span class="nav-icon">👥</span>Users</div>
   </nav>
   <div style="padding:16px 24px;border-top:1px solid var(--border);font-size:10px;color:var(--muted);text-align:center">© 2025 All Rights Reserved</div>
@@ -94,6 +102,7 @@ input,select{width:100%;padding:10px 14px;background:#fff;border:1.5px solid var
     <div id="pSav" style="display:none"></div>
     <div id="pGold" style="display:none"></div>
     <div id="pStorage" style="display:none"></div>
+    <div id="pAnalytics" style="display:none"></div>
     <div id="pUsers" style="display:none"></div>
   </div>
 </div>
@@ -112,12 +121,12 @@ let exp=[],sav=[],gold=[],users=[],cu='',pg='home',pc=null,growthChart=null;
 const show=()=>document.getElementById('loading').classList.add('show'),hide=()=>document.getElementById('loading').classList.remove('show'),toast=m=>{const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)},mdl=(t,h)=>{document.getElementById('mdlT').textContent=t;document.getElementById('mdlB').innerHTML=h;document.getElementById('mdl').classList.add('show')},closeMdl=()=>document.getElementById('mdl').classList.remove('show');
 
 async function load(){show();const[u,e,s,g]=await Promise.all([sb.from('users').select('*'),sb.from('expenses').select('*').eq('user_id',cu),sb.from('savings').select('*').eq('user_id',cu),sb.from('gold_items').select('*').eq('user_id',cu)]);if(u.data)users=u.data;if(e.data)exp=e.data;if(s.data)sav=s.data;if(g.data)gold=g.data;hide()}
-const getU=()=>users.find(u=>u.id===cu)||users[0],getR=()=>{const u=getU();return u?u.role:'user'},updateUI=()=>{const u=getU();if(!u)return;document.getElementById('uname').textContent=u.name;const a=document.getElementById('av');a.innerHTML=u.profile_image?`<img src="${u.profile_image}"/>`:(u.avatar||u.name[0]);const isAdmin=u.role==='super';document.getElementById('navU').style.display=isAdmin?'flex':'none';document.getElementById('navStorage').style.display=isAdmin?'flex':'none'};
+const getU=()=>users.find(u=>u.id===cu)||users[0],getR=()=>{const u=getU();return u?u.role:'user'},updateUI=()=>{const u=getU();if(!u)return;document.getElementById('uname').textContent=u.name;const a=document.getElementById('av');a.innerHTML=u.profile_image?`<img src="${u.profile_image}"/>`:(u.avatar||u.name[0]);const isAdmin=u.role==='super';document.getElementById('navU').style.display=isAdmin?'flex':'none';document.getElementById('navStorage').style.display=isAdmin?'flex':'none';document.getElementById('navAnalytics').style.display=isAdmin?'flex':'none'};
 function toggleUM(){const m=document.getElementById('um');m.style.display=m.style.display==='none'?'block':'none';if(m.style.display==='block')renderUL()}
 function renderUL(){const r=getR(),v=users.filter(u=>r==='super'||u.role!=='super');document.getElementById('ulist').innerHTML=v.map(u=>`<div onclick="switchU('${u.id}')" style="padding:8px 10px;cursor:pointer;border-radius:6px;${u.id===cu?'background:var(--hover)':''}"><div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:24px;height:24px;font-size:11px">${u.profile_image?`<img src="${u.profile_image}"/>`:(u.avatar||u.name[0])}</div><div style="flex:1;font-size:12px;font-weight:600">${u.name}</div>${u.id===cu?'<span style="color:var(--cyan);font-size:14px">✓</span>':''}</div></div>`).join('')}
 async function switchU(id){const r=getR(),t=users.find(u=>u.id===id);if(r!=='super'&&t&&t.role==='super'){toast('⛔ Denied');document.getElementById('um').style.display='none';return}cu=id;localStorage.setItem('cu',id);document.getElementById('um').style.display='none';await load();updateUI();goTo('home');toast('✓ Switched')}
 
-function goTo(p){if((p==='users'||p==='storage')&&getR()!=='super'){toast('⛔ Admin only');return}pg=p;document.querySelectorAll('#pHome,#pExp,#pSav,#pGold,#pStorage,#pUsers').forEach(x=>x.style.display='none');const pid=p==='exp'?'pExp':p==='sav'?'pSav':p==='gold'?'pGold':p==='storage'?'pStorage':p==='users'?'pUsers':'pHome';document.getElementById(pid).style.display='block';document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector(`[data-page="${p}"]`)?.classList.add('active');const tt={home:'Dashboard',exp:'Expenses',sav:'Savings',gold:'Gold',storage:'Storage Monitor',users:'Users'};document.getElementById('title').textContent=tt[p];if(p==='home')rHome();if(p==='exp')rExp();if(p==='sav')rSav();if(p==='gold')rGold();if(p==='storage')rStorage();if(p==='users')rUsers()}
+function goTo(p){if((p==='users'||p==='storage'||p==='analytics')&&getR()!=='super'){toast('⛔ Admin only');return}pg=p;document.querySelectorAll('#pHome,#pExp,#pSav,#pGold,#pStorage,#pAnalytics,#pUsers').forEach(x=>x.style.display='none');const pid=p==='exp'?'pExp':p==='sav'?'pSav':p==='gold'?'pGold':p==='storage'?'pStorage':p==='analytics'?'pAnalytics':p==='users'?'pUsers':'pHome';document.getElementById(pid).style.display='block';document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector(`[data-page="${p}"]`)?.classList.add('active');const tt={home:'Dashboard',exp:'Expenses',sav:'Savings',gold:'Gold',storage:'Storage Monitor',analytics:'User Analytics',users:'Users'};document.getElementById('title').textContent=tt[p];if(p==='home')rHome();if(p==='exp')rExp();if(p==='sav')rSav();if(p==='gold')rGold();if(p==='storage')rStorage();if(p==='analytics')rAnalytics();if(p==='users')rUsers()}
 
 function showRegister(){
   mdl('Create New Account',`<div style="display:flex;flex-direction:column;gap:14px">
@@ -252,7 +261,7 @@ function calcStorage(){const expSize=exp.length*150,savSize=sav.length*150,goldS
 
 function rStorage(){const stats=calcStorage();const months=['Jan','Feb','Mar','Apr','May','Jun'];const data=[12,15,18,20,22,stats.estimatedMB];let h=`<div class="metrics"><div class="metric cyan"><div class="metric-top"></div><div class="metric-label">Total Records</div><div class="metric-value">${stats.totalRecords}</div><div class="metric-sub">All entries</div></div><div class="metric purple"><div class="metric-top"></div><div class="metric-label">Storage Used</div><div class="metric-value">${stats.estimatedMB.toFixed(1)} MB</div><div class="metric-sub">Out of 500 MB</div></div><div class="metric green"><div class="metric-top"></div><div class="metric-label">Space Left</div><div class="metric-value">${stats.remainingMB.toFixed(0)} MB</div><div class="metric-sub">${(100-stats.usedPercent).toFixed(1)}% free</div></div><div class="metric amber"><div class="metric-top"></div><div class="metric-label">Can Store</div><div class="metric-value">${Math.floor(stats.remainingMB*1000/150)}K</div><div class="metric-sub">More records</div></div></div>`;h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--cyan)">💾 Storage Usage</h3><div class="progress-ring"><svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="54"/><circle class="fill" cx="60" cy="60" r="54" stroke-dasharray="${2*Math.PI*54}" stroke-dashoffset="${2*Math.PI*54*(1-stats.usedPercent/100)}"/></svg><div class="progress-ring-text">${stats.usedPercent.toFixed(1)}%</div></div><div style="text-align:center;margin-top:16px;color:var(--dim);font-size:13px">Using ${stats.estimatedMB.toFixed(1)} MB of 500 MB</div></div>`;h+=`<div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--cyan)">📊 Breakdown</h3><div style="display:flex;flex-direction:column;gap:10px"><div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">💳 Expenses</span><span style="font-weight:700;color:var(--red)">${stats.expCount}</span></div><div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">💰 Savings</span><span style="font-weight:700;color:var(--green)">${stats.savCount}</span></div><div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">🪙 Gold</span><span style="font-weight:700;color:var(--amber)">${stats.goldCount}</span></div><div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">👥 Users</span><span style="font-weight:700;color:var(--purple)">${stats.userCount}</span></div></div></div></div>`;h+=`<div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--cyan)">📈 Growth (6 Months)</h3><canvas id="growthChart" height="200"></canvas></div>`;h+=`<div class="card" style="background:linear-gradient(135deg,rgba(6,182,212,0.05),rgba(139,92,246,0.05))"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--purple)">ℹ️ Storage Info</h3><div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--dim)"><div>📦 <strong>Location:</strong> Supabase (Japan)</div><div>💾 <strong>Backup:</strong> Daily automatic</div><div>🔐 <strong>Security:</strong> Encrypted</div><div>♾️ <strong>Limit:</strong> 500 MB (~100K records)</div><div>📊 <strong>Capacity Left:</strong> ${Math.floor(stats.remainingMB*1000/150).toLocaleString()} more records</div></div></div>`;document.getElementById('pStorage').innerHTML=h;setTimeout(()=>{const ctx=document.getElementById('growthChart');if(!ctx||!window.Chart)return;if(growthChart)growthChart.destroy();growthChart=new Chart(ctx,{type:'line',data:{labels:months,datasets:[{label:'Storage (MB)',data:data,borderColor:'#06b6d4',backgroundColor:'rgba(6,182,212,0.1)',borderWidth:3,tension:0.4,fill:true,pointRadius:5,pointBackgroundColor:'#06b6d4',pointBorderColor:'#fff',pointBorderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#475569',font:{size:11}}},tooltip:{backgroundColor:'#fff',titleColor:'#0f172a',bodyColor:'#475569',borderColor:'#e2e8f0',borderWidth:2,padding:10}},scales:{y:{beginAtZero:true,ticks:{color:'#94a3b8',callback:v=>v+' MB'}},x:{ticks:{color:'#94a3b8'}}}}})},100)}
 
-function rHome(){const m=new Date().toISOString().slice(0,7),te=exp.filter(e=>e.date.startsWith(m)),tt=te.reduce((s,e)=>s+Number(e.amount),0),at=exp.reduce((s,e)=>s+Number(e.amount),0),st=sav.reduce((s,r)=>s+Number(r.amount),0);let h=`<div class="metrics"><div class="metric cyan"><div class="metric-top"></div><div class="metric-label">This Month</div><div class="metric-value">${fmtS(tt)}</div><div class="metric-sub">${te.length} txns</div></div><div class="metric red"><div class="metric-top"></div><div class="metric-label">All Expenses</div><div class="metric-value">${fmtS(at)}</div><div class="metric-sub">${exp.length} total</div></div><div class="metric green"><div class="metric-top"></div><div class="metric-label">Savings</div><div class="metric-value">${fmtS(st)}</div><div class="metric-sub">${sav.length} records</div></div><div class="metric purple"><div class="metric-top"></div><div class="metric-label">Gold</div><div class="metric-value">${gold.length}</div><div class="metric-sub">${gold.filter(g=>!g.sold).length} hold</div></div></div>`;const cm={};exp.forEach(e=>{cm[e.category]=(cm[e.category]||0)+Number(e.amount)});const cd=Object.entries(cm).sort((a,b)=>b[1]-a[1]).slice(0,8);h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--cyan)">📊 Breakdown</h3><canvas id="pc" height="200"></canvas></div>`;const rc=[...exp].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);h+=`<div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--cyan)">🕐 Recent</h3>${rc.length===0?'<div style="text-align:center;padding:30px;color:var(--muted);font-size:13px">No data</div>':rc.map(e=>{const c=CM[e.category]||CM.other;return`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:20px">${c.icon}</span><div style="flex:1"><div style="font-weight:600;font-size:13px">${c.label}</div><div style="font-size:11px;color:var(--muted)">${e.date}</div></div><div style="font-weight:700;color:var(--red);font-size:14px">${fmtS(e.amount)}</div></div>`}).join('')}</div></div>`;document.getElementById('pHome').innerHTML=h;if(window.Chart&&cd.length>0)setTimeout(()=>{const x=document.getElementById('pc');if(!x)return;if(pc)pc.destroy();pc=new Chart(x,{type:'doughnut',data:{labels:cd.map(([c])=>(CM[c]||CM.other).label),datasets:[{data:cd.map(([,v])=>v),backgroundColor:cd.map(([c])=>(CM[c]||CM.other).color),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11},padding:8,color:'#475569'}},tooltip:{callbacks:{label:c=>` ${c.label}: ${fmt(c.parsed)}`}}}}})},50)}
+function rHome(){const m=new Date().toISOString().slice(0,7),te=exp.filter(e=>e.date.startsWith(m)),tt=te.reduce((s,e)=>s+Number(e.amount),0),at=exp.reduce((s,e)=>s+Number(e.amount),0),st=sav.reduce((s,r)=>s+Number(r.amount),0);const isAdmin=getR()==='super';let h=`<div class="metrics"><div class="metric cyan"><div class="metric-top"></div><div class="metric-label">This Month</div><div class="metric-value">${fmtS(tt)}</div><div class="metric-sub">${te.length} txns</div></div><div class="metric red"><div class="metric-top"></div><div class="metric-label">All Expenses</div><div class="metric-value">${fmtS(at)}</div><div class="metric-sub">${exp.length} total</div></div><div class="metric green"><div class="metric-top"></div><div class="metric-label">Savings</div><div class="metric-value">${fmtS(st)}</div><div class="metric-sub">${sav.length} records</div></div><div class="metric purple"><div class="metric-top"></div><div class="metric-label">Gold</div><div class="metric-value">${gold.length}</div><div class="metric-sub">${gold.filter(g=>!g.sold).length} hold</div></div></div>`;if(isAdmin){const totalUsers=users.length;const adminUsers=users.filter(u=>u.role==='super').length;const regularUsers=users.filter(u=>u.role!=='user'||u.role==='user').length;const today=new Date().toISOString().slice(0,10);const todayRegistered=users.filter(u=>u.created_at&&u.created_at.startsWith(today)).length;const thisMonthRegistered=users.filter(u=>u.created_at&&u.created_at.startsWith(m)).length;h+=`<div class="card" style="background:linear-gradient(135deg,rgba(139,92,246,0.05),rgba(6,182,212,0.05));border:2px solid var(--purple)"><h3 style="font-size:16px;font-weight:700;margin-bottom:14px;color:var(--purple)">👥 User Statistics (Admin View)</h3><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px"><div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.04)"><div style="font-size:11px;color:var(--dim);font-weight:700;margin-bottom:6px">TOTAL USERS</div><div style="font-size:24px;font-weight:800;color:var(--purple)">${totalUsers}</div><div style="font-size:11px;color:var(--muted)">All accounts</div></div><div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.04)"><div style="font-size:11px;color:var(--dim);font-weight:700;margin-bottom:6px">ADMINS</div><div style="font-size:24px;font-weight:800;color:var(--cyan)">${adminUsers}</div><div style="font-size:11px;color:var(--muted)">Super users</div></div><div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.04)"><div style="font-size:11px;color:var(--dim);font-weight:700;margin-bottom:6px">REGULAR USERS</div><div style="font-size:24px;font-weight:800;color:var(--green)">${totalUsers-adminUsers}</div><div style="font-size:11px;color:var(--muted)">Standard accounts</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="background:#fff;padding:12px;border-radius:8px;border:1px solid var(--border)"><div style="font-size:12px;color:var(--dim);font-weight:600">📅 Registered Today</div><div style="font-size:20px;font-weight:800;color:var(--cyan);margin-top:4px">${todayRegistered}</div></div><div style="background:#fff;padding:12px;border-radius:8px;border:1px solid var(--border)"><div style="font-size:12px;color:var(--dim);font-weight:600">📊 This Month</div><div style="font-size:20px;font-weight:800;color:var(--purple);margin-top:4px">${thisMonthRegistered}</div></div></div><div style="margin-top:12px;padding:10px;background:rgba(139,92,246,0.08);border-radius:8px;border:1px solid rgba(139,92,246,0.2)"><div style="font-size:12px;font-weight:600;color:var(--purple);margin-bottom:6px">👤 Recent Users:</div><div style="font-size:12px;color:var(--dim)">${users.slice(-5).reverse().map(u=>`${u.name} (@${u.username})`).join(' • ')}</div></div></div>`}const cm={};exp.forEach(e=>{cm[e.category]=(cm[e.category]||0)+Number(e.amount)});const cd=Object.entries(cm).sort((a,b)=>b[1]-a[1]).slice(0,8);h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--cyan)">📊 Breakdown</h3><canvas id="pc" height="200"></canvas></div>`;const rc=[...exp].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);h+=`<div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--cyan)">🕐 Recent</h3>${rc.length===0?'<div style="text-align:center;padding:30px;color:var(--muted);font-size:13px">No data</div>':rc.map(e=>{const c=CM[e.category]||CM.other;return`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:20px">${c.icon}</span><div style="flex:1"><div style="font-weight:600;font-size:13px">${c.label}</div><div style="font-size:11px;color:var(--muted)">${e.date}</div></div><div style="font-weight:700;color:var(--red);font-size:14px">${fmtS(e.amount)}</div></div>`}).join('')}</div></div>`;document.getElementById('pHome').innerHTML=h;if(window.Chart&&cd.length>0)setTimeout(()=>{const x=document.getElementById('pc');if(!x)return;if(pc)pc.destroy();pc=new Chart(x,{type:'doughnut',data:{labels:cd.map(([c])=>(CM[c]||CM.other).label),datasets:[{data:cd.map(([,v])=>v),backgroundColor:cd.map(([c])=>(CM[c]||CM.other).color),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11},padding:8,color:'#475569'}},tooltip:{callbacks:{label:c=>` ${c.label}: ${fmt(c.parsed)}`}}}}})},50)}
 
 function rExp(){const mo=[...new Set(exp.map(e=>e.date.slice(0,7)))].sort().reverse();let h=`<div class="filter-bar"><input id="se" placeholder="🔍 Search" oninput="fExp()" style="flex:2"/><select id="cf" onchange="fExp()"><option value="all">All</option>${CATS.map(c=>`<option value="${c.id}">${c.icon} ${c.label}</option>`).join('')}</select><select id="mf" onchange="fExp()"><option value="">All Months</option>${mo.map(m=>`<option value="${m}">${m}</option>`).join('')}</select><input type="date" id="df" onchange="fExp()"/><button class="btn btn-primary" onclick="addE()">+</button><button class="btn btn-ghost" onclick="expXL()">📊</button><button class="btn btn-ghost" onclick="expPDF()">📄</button></div><div id="exl"></div>`;document.getElementById('pExp').innerHTML=h;fExp()}
 function fExp(){const s=(document.getElementById('se').value||'').toLowerCase(),c=document.getElementById('cf').value,m=document.getElementById('mf').value,d=document.getElementById('df').value,f=exp.filter(e=>(c==='all'||e.category===c)&&(!m||e.date.startsWith(m))&&(!d||e.date===d)&&(!s||(e.note||'').toLowerCase().includes(s)||(CM[e.category]?.label||'').toLowerCase().includes(search))).sort((a,b)=>b.date.localeCompare(a.date)),t=f.reduce((s,e)=>s+Number(e.amount),0);if(!f.length){document.getElementById('exl').innerHTML='<div class="card" style="text-align:center;padding:50px;color:var(--muted)"><div style="font-size:40px;margin-bottom:10px">📋</div>No expenses</div>';return}document.getElementById('exl').innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--border)"><span style="font-weight:600;font-size:13px">${f.length} transactions</span><span style="font-size:20px;font-weight:800;color:var(--red)">${fmt(t)}</span></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Category</th><th>Note</th><th>Amount</th><th>Actions</th></tr></thead><tbody>${f.map(e=>{const c=CM[e.category]||CM.other;return`<tr><td style="font-size:12px;font-weight:600">${e.date}</td><td><span class="badge cyan">${c.icon} ${c.label}</span></td><td style="font-size:13px">${e.note||'—'}</td><td style="font-weight:700;color:var(--red);font-size:14px">${fmt(e.amount)}</td><td><button onclick="edE('${e.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;padding:4px">✏️</button> <button onclick="delE('${e.id}')" style="background:none;border:none;color:var(--red);cursor:pointer;padding:4px">🗑</button></td></tr>`}).join('')}</tbody></table></div></div>`}
@@ -282,6 +291,112 @@ function edG(id){const g=gold.find(x=>x.id===id);if(!g)return;mdl('Edit',`<div s
 async function upG(id){const n=document.getElementById('gn').value.trim(),w=document.getElementById('gw').value,a=document.getElementById('ga').value;if(!n||!w||!a){alert('Fill fields');return}const so=document.getElementById('gs').checked,sd=document.getElementById('gsd').value,sa=document.getElementById('gsa').value,l=so&&sa?(Number(a)-Number(sa)):0;show();await sb.from('gold_items').update({item_name:n,weight:Number(w),amount:Number(a),buy_date:document.getElementById('gbd').value,sold:so,sell_date:so?sd:null,sell_amount:so?Number(sa):null,loss_amount:l}).eq('id',id);hide();closeMdl();await load();rGold();toast('✓ Updated')}
 async function delG(id){if(!confirm('Delete?'))return;show();await sb.from('gold_items').delete().eq('id',id);hide();await load();rGold();toast('✓ Deleted')}
 
+function rAnalytics(){
+  const totalUsers=users.length;
+  const adminCount=users.filter(u=>u.role==='super').length;
+  const regularUsers=users.filter(u=>u.role==='user').length;
+  const usersWithEmail=users.filter(u=>u.email).length;
+  const usersWithPhoto=users.filter(u=>u.profile_image).length;
+  
+  const now=new Date();
+  const thisMonth=now.toISOString().slice(0,7);
+  const lastMonth=new Date(now.getFullYear(),now.getMonth()-1).toISOString().slice(0,7);
+  
+  const newUsersThisMonth=users.filter(u=>u.created_at&&u.created_at.startsWith(thisMonth)).length;
+  const newUsersLastMonth=users.filter(u=>u.created_at&&u.created_at.startsWith(lastMonth)).length;
+  
+  const userActivity=users.map(u=>{
+    const userExp=exp.filter(e=>e.user_id===u.id);
+    const userSav=sav.filter(s=>s.user_id===u.id);
+    const userGold=gold.filter(g=>g.user_id===u.id);
+    const totalRecords=userExp.length+userSav.length+userGold.length;
+    const totalSpent=userExp.reduce((sum,e)=>sum+Number(e.amount),0);
+    return{
+      id:u.id,
+      name:u.name,
+      username:u.username,
+      role:u.role,
+      totalRecords,
+      totalSpent,
+      joinedDate:u.created_at?new Date(u.created_at).toLocaleDateString():'—'
+    };
+  }).sort((a,b)=>b.totalRecords-a.totalRecords);
+  
+  let h=`<div class="metrics">
+    <div class="metric purple"><div class="metric-top"></div><div class="metric-label">Total Users</div><div class="metric-value">${totalUsers}</div><div class="metric-sub">Registered</div></div>
+    <div class="metric cyan"><div class="metric-top"></div><div class="metric-label">Regular Users</div><div class="metric-value">${regularUsers}</div><div class="metric-sub">${adminCount} admins</div></div>
+    <div class="metric green"><div class="metric-top"></div><div class="metric-label">New This Month</div><div class="metric-value">${newUsersThisMonth}</div><div class="metric-sub">${newUsersLastMonth} last month</div></div>
+    <div class="metric amber"><div class="metric-top"></div><div class="metric-label">Active Users</div><div class="metric-value">${userActivity.filter(u=>u.totalRecords>0).length}</div><div class="metric-sub">Have data</div></div>
+  </div>`;
+  
+  h+=`<div class="card">
+    <h3 style="font-size:18px;font-weight:700;margin-bottom:16px;color:var(--cyan)">👥 User Activity Report</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>User</th><th>Username</th><th>Role</th><th>Records</th><th>Total Spent</th><th>Joined</th></tr>
+        </thead>
+        <tbody>
+          ${userActivity.map(u=>`<tr>
+            <td><div style="display:flex;align-items:center;gap:8px">
+              <div class="avatar" style="width:28px;height:28px;font-size:12px">${users.find(x=>x.id===u.id)?.profile_image?`<img src="${users.find(x=>x.id===u.id).profile_image}"/>`:(u.name[0]||'U')}</div>
+              <span style="font-weight:600;font-size:13px">${u.name}</span>
+            </div></td>
+            <td style="font-size:12px;color:var(--dim)">${u.username}</td>
+            <td><span class="badge ${u.role==='super'?'purple':'cyan'}">${u.role==='super'?'Admin':'User'}</span></td>
+            <td style="font-weight:700;color:var(--cyan)">${u.totalRecords}</td>
+            <td style="font-weight:700;color:var(--red)">${fmtS(u.totalSpent)}</td>
+            <td style="font-size:12px;color:var(--muted)">${u.joinedDate}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+  
+  h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--cyan)">📊 User Stats</h3>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(139,92,246,0.08);border-radius:8px">
+          <span style="font-size:13px;font-weight:600">👑 Admins</span>
+          <span style="font-weight:800;color:var(--purple);font-size:18px">${adminCount}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(6,182,212,0.08);border-radius:8px">
+          <span style="font-size:13px;font-weight:600">👤 Regular</span>
+          <span style="font-weight:800;color:var(--cyan);font-size:18px">${regularUsers}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(16,185,129,0.08);border-radius:8px">
+          <span style="font-size:13px;font-weight:600">✅ Active</span>
+          <span style="font-weight:800;color:var(--green);font-size:18px">${userActivity.filter(u=>u.totalRecords>0).length}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--cyan)">🎯 Quick Stats</h3>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--dim)">With Email:</span>
+          <span style="font-weight:700">${usersWithEmail} / ${totalUsers}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--dim)">With Photos:</span>
+          <span style="font-weight:700">${usersWithPhoto} / ${totalUsers}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--dim)">Most Active:</span>
+          <span style="font-weight:700;color:var(--cyan)">${userActivity[0]?.name||'—'}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0">
+          <span style="color:var(--dim)">Avg Records/User:</span>
+          <span style="font-weight:700">${totalUsers>0?(userActivity.reduce((s,u)=>s+u.totalRecords,0)/totalUsers).toFixed(0):'0'}</span>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  
+  document.getElementById('pAnalytics').innerHTML=h;
+}
+
 function rUsers(){let h=`<div style="text-align:right;margin-bottom:16px"><button class="btn btn-primary" onclick="addU()">+ Create</button></div><div class="card"><div class="table-wrap">${users.length===0?'<div style="text-align:center;padding:50px;color:var(--muted)">No users</div>':`<table><thead><tr><th>Name</th><th>Username</th><th>Email</th><th>Role</th><th></th></tr></thead><tbody>${users.map(u=>`<tr><td><div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:28px;height:28px;font-size:12px">${u.profile_image?`<img src="${u.profile_image}"/>`:(u.avatar||u.name[0])}</div><span style="font-weight:600;font-size:13px">${u.name}</span></div></td><td style="font-weight:600;font-size:12px">${u.username}</td><td style="font-size:12px;color:var(--dim)">${u.email||'—'}</td><td><span class="badge ${u.role==='super'?'purple':'cyan'}">${u.role==='super'?'Super':'User'}</span></td><td><button onclick="edU('${u.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;padding:4px">✏️</button> ${u.id!=='admin'?`<button onclick="delU('${u.id}')" style="background:none;border:none;color:var(--red);cursor:pointer;padding:4px">🗑</button>`:''}</td></tr>`).join('')}</tbody></table>`}</div></div>`;document.getElementById('pUsers').innerHTML=h}
 
 function uForm(u,fn){const im=u.profile_image||'';return`<div style="display:flex;flex-direction:column;gap:12px"><div style="text-align:center"><div class="avatar" onclick="document.getElementById('pi').click()" style="width:80px;height:80px;font-size:32px;cursor:pointer;margin:0 auto;position:relative">${im?`<img src="${im}"/>`:(u.avatar||u.name[0]||'U')}<input type="file" id="pi" accept="image/*" onchange="hImg(event)" style="display:none"/><div style="position:absolute;bottom:0;right:0;width:28px;height:28px;background:var(--cyan);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer">📷</div></div><input type="hidden" id="uim" value="${im}"/></div><div><label>Name</label><input id="un" value="${u.name||''}"/></div><div><label>Email</label><input type="email" id="uemail" value="${u.email||''}" placeholder="for password recovery"/></div><div><label>Username</label><input id="uu" value="${u.username||''}"/></div><div><label>Password</label><input type="password" id="up" value="${u.password||''}" placeholder="${!u.username?'Required':'Keep blank to keep'}"/></div><div><label>Avatar</label><input id="uav" value="${u.avatar||''}" maxlength="1"/></div><div><label>Role</label><select id="ur"><option value="user"${u.role==='user'?' selected':''}>User</option><option value="super"${u.role==='super'?' selected':''}>Super</option></select></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px"><button class="btn btn-ghost" onclick="closeMdl()">Cancel</button><button class="btn btn-primary" onclick="${fn}">Save</button></div></div>`}
@@ -295,7 +410,7 @@ async function delU(id){if(id==='admin')return;if(!confirm('Delete?'))return;sho
 async function doLogin(){const u=document.getElementById('loginUser').value.trim().toLowerCase(),p=document.getElementById('loginPass').value,er=document.getElementById('loginErr');if(!u||!p){er.textContent='Enter credentials';er.style.display='block';return}show();const{data}=await sb.from('users').select('*').eq('username',u).single();hide();if(!data){er.textContent='❌ Not found';er.style.display='block';return}if(data.password!==p){er.textContent='❌ Wrong password';er.style.display='block';return}cu=data.id;localStorage.setItem('cu',cu);localStorage.setItem('li','1');document.getElementById('loginPage').style.display='none';document.getElementById('app').style.display='flex';await load();updateUI();goTo('home');toast('✓ Welcome, '+data.name)}
 function doLogout(){localStorage.clear();document.getElementById('um').style.display='none';document.getElementById('app').style.display='none';document.getElementById('loginPage').style.display='flex';cu='';exp=[];sav=[];gold=[];users=[]}
 
-async function init(){show();sb=window.supabase.createClient(SU,SK);const l=localStorage.getItem('li'),u=localStorage.getItem('cu');if(l&&u){const{data}=await sb.from('users').select('*');if(data){users=data;const usr=users.find(x=>x.id===u);if(usr){cu=u;document.getElementById('loginPage').style.display='none';document.getElementById('app').style.display='flex';await load();updateUI();goTo('home');return}}}document.getElementById('loginPage').style.display='flex';hide()}
+async function init(){show();sb=window.supabase.createClient(SU,SK);const l=localStorage.getItem('li'),u=localStorage.getItem('cu');if(l&&u){const{data}=await sb.from('users').select('*');if(data){users=data;const usr=users.find(x=>x.id===u);if(usr){cu=u;document.getElementById('loginPage').style.display='none';document.getElementById('app').style.display='flex';await load();updateUI();goTo('home');return}}}document.getElementById('loginPage').style.display='flex';hide();if('serviceWorker'in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}}
 
 window.addEventListener('load',init);
 </script>
