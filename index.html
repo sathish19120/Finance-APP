@@ -11,7 +11,7 @@
 .app{display:flex;min-height:100vh}.sidebar{width:var(--sidebar);background:linear-gradient(180deg,#fff,#f8fafc);border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;z-index:100;box-shadow:2px 0 12px rgba(0,0,0,0.04);transition:transform .3s}.logo-area{height:var(--header);display:flex;align-items:center;padding:0 24px;border-bottom:1px solid var(--border)}.logo{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.nav{flex:1;padding:20px 0}.nav-item{display:flex;align-items:center;gap:12px;padding:12px 24px;color:var(--dim);cursor:pointer;transition:all .15s;border-left:3px solid transparent;font-weight:600}.nav-item:hover{background:var(--hover);color:var(--text)}.nav-item.active{background:rgba(6,182,212,0.08);color:var(--cyan);border-left-color:var(--cyan)}.nav-icon{font-size:20px}.main{flex:1;margin-left:var(--sidebar)}.topbar{height:var(--header);background:rgba(255,255,255,0.98);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:90;box-shadow:0 1px 8px rgba(0,0,0,0.04)}.page-title{font-size:24px;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.user-badge{display:flex;align-items:center;gap:10px;padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:999px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.06)}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}.content{padding:28px}
 .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,0.04);transition:transform .2s,box-shadow .2s;position:relative}.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:12px 12px 0 0}.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}.metric{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);position:relative;overflow:hidden}.metric-top{position:absolute;top:0;left:0;right:0;height:3px}.metric.cyan .metric-top{background:var(--cyan)}.metric.green .metric-top{background:var(--green)}.metric.red .metric-top{background:var(--red)}.metric.amber .metric-top{background:var(--amber)}.metric.purple .metric-top{background:var(--purple)}.metric-label{font-size:11px;color:var(--dim);font-weight:700;text-transform:uppercase;margin-bottom:8px}.metric-value{font-size:28px;font-weight:800;margin-bottom:4px}.metric.cyan .metric-value{color:var(--cyan)}.metric.green .metric-value{color:var(--green)}.metric.red .metric-value{color:var(--red)}.metric.amber .metric-value{color:var(--amber)}.metric.purple .metric-value{color:var(--purple)}.metric-sub{font-size:12px;color:var(--muted)}
-.btn{padding:10px 20px;border-radius:8px;border:none;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s}.btn-primary{background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;box-shadow:0 4px 12px rgba(6,182,212,0.25)}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(6,182,212,0.3)}.btn-ghost{background:#fff;color:var(--dim);border:1px solid var(--border)}.btn-ghost:hover{background:var(--hover)}
+.btn{padding:10px 20px;border-radius:8px;border:none;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s}.btn-primary{background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;box-shadow:0 4px 12px rgba(6,182,212,0.25)}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(6,182,212,0.3)}.btn-ghost{background:#fff;color:var(--dim);border:1px solid var(--border)}.btn-ghost:hover{background:var(--hover)}.btn-secondary{background:transparent;color:var(--cyan);border:1.5px solid var(--cyan)}.btn-secondary:hover{background:rgba(6,182,212,0.05)}
 input,select{width:100%;padding:10px 14px;background:#fff;border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;transition:border .15s}input:focus,select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(6,182,212,0.08)}label{display:block;font-size:11px;font-weight:700;color:var(--dim);margin-bottom:5px;text-transform:uppercase}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.5);backdrop-filter:blur(4px);z-index:300;align-items:center;justify-content:center;padding:20px}.modal-overlay.show{display:flex}.modal{background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}.modal-header{display:flex;justify-content:space-between;margin-bottom:20px}.modal-title{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.modal-close{width:32px;height:32px;border-radius:50%;background:var(--hover);border:1px solid var(--border);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:var(--dim)}.modal-close:hover{transform:rotate(90deg)}
 .table-wrap{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff}table{width:100%;border-collapse:collapse}th{background:#f8fafc;padding:14px;text-align:left;font-size:11px;font-weight:800;text-transform:uppercase;color:var(--dim);border-bottom:2px solid var(--cyan)}td{padding:14px;border-bottom:1px solid var(--border);font-size:14px}tr:hover{background:var(--hover)}
@@ -45,9 +45,12 @@ input,select{width:100%;padding:10px 14px;background:#fff;border:1.5px solid var
       <h2 style="font-size:28px;font-weight:800;margin-bottom:6px">Welcome</h2>
       <p style="color:var(--dim);font-size:14px;margin-bottom:28px">Sign in to continue</p>
       <div style="display:flex;flex-direction:column;gap:14px">
-        <div><label>Username</label><input id="loginUser" placeholder="admin" onkeyup="if(event.key==='Enter')doLogin()"/></div>
+        <div><label>Username</label><input id="loginUser" placeholder="Enter username" onkeyup="if(event.key==='Enter')doLogin()"/></div>
         <div><label>Password</label><input type="password" id="loginPass" placeholder="Enter password" onkeyup="if(event.key==='Enter')doLogin()"/></div>
-        <div style="text-align:right;margin-top:-6px"><a href="#" onclick="forgotPass();return false" style="color:var(--cyan);font-size:12px;text-decoration:none;font-weight:600">Forgot?</a></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:-6px">
+          <a href="#" onclick="showRegister();return false" style="color:var(--purple);font-size:12px;text-decoration:none;font-weight:600">Create Account</a>
+          <a href="#" onclick="forgotPass();return false" style="color:var(--cyan);font-size:12px;text-decoration:none;font-weight:600">Forgot Password?</a>
+        </div>
         <button class="btn btn-primary" onclick="doLogin()" style="width:100%;padding:12px">Sign In</button>
         <div id="loginErr" style="display:none;color:var(--red);font-size:12px;background:rgba(239,68,68,0.08);padding:8px;border-radius:6px"></div>
       </div>
@@ -114,74 +117,145 @@ function toggleUM(){const m=document.getElementById('um');m.style.display=m.styl
 function renderUL(){const r=getR(),v=users.filter(u=>r==='super'||u.role!=='super');document.getElementById('ulist').innerHTML=v.map(u=>`<div onclick="switchU('${u.id}')" style="padding:8px 10px;cursor:pointer;border-radius:6px;${u.id===cu?'background:var(--hover)':''}"><div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:24px;height:24px;font-size:11px">${u.profile_image?`<img src="${u.profile_image}"/>`:(u.avatar||u.name[0])}</div><div style="flex:1;font-size:12px;font-weight:600">${u.name}</div>${u.id===cu?'<span style="color:var(--cyan);font-size:14px">✓</span>':''}</div></div>`).join('')}
 async function switchU(id){const r=getR(),t=users.find(u=>u.id===id);if(r!=='super'&&t&&t.role==='super'){toast('⛔ Denied');document.getElementById('um').style.display='none';return}cu=id;localStorage.setItem('cu',id);document.getElementById('um').style.display='none';await load();updateUI();goTo('home');toast('✓ Switched')}
 
-function goTo(p){if(p==='users'&&getR()!=='super'){toast('⛔ Admin only');return}pg=p;document.querySelectorAll('#pHome,#pExp,#pSav,#pGold,#pStorage,#pUsers').forEach(x=>x.style.display='none');const pid=p==='exp'?'pExp':p==='sav'?'pSav':p==='gold'?'pGold':p==='storage'?'pStorage':p==='users'?'pUsers':'pHome';document.getElementById(pid).style.display='block';document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector(`[data-page="${p}"]`).classList.add('active');const tt={home:'Dashboard',exp:'Expenses',sav:'Savings',gold:'Gold',storage:'Storage Monitor',users:'Users'};document.getElementById('title').textContent=tt[p];if(p==='home')rHome();if(p==='exp')rExp();if(p==='sav')rSav();if(p==='gold')rGold();if(p==='storage')rStorage();if(p==='users')rUsers()}
+function goTo(p){if(p==='users'&&getR()!=='super'){toast('⛔ Admin only');return}pg=p;document.querySelectorAll('#pHome,#pExp,#pSav,#pGold,#pStorage,#pUsers').forEach(x=>x.style.display='none');const pid=p==='exp'?'pExp':p==='sav'?'pSav':p==='gold'?'pGold':p==='storage'?'pStorage':p==='users'?'pUsers':'pHome';document.getElementById(pid).style.display='block';document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector(`[data-page="${p}"]`)?.classList.add('active');const tt={home:'Dashboard',exp:'Expenses',sav:'Savings',gold:'Gold',storage:'Storage Monitor',users:'Users'};document.getElementById('title').textContent=tt[p];if(p==='home')rHome();if(p==='exp')rExp();if(p==='sav')rSav();if(p==='gold')rGold();if(p==='storage')rStorage();if(p==='users')rUsers()}
 
-function calcStorage(){
-  const expSize=exp.length*150;
-  const savSize=sav.length*150;
-  const goldSize=gold.length*200;
-  const userSize=users.length*300;
-  const imgSize=users.filter(u=>u.profile_image).length*150000;
-  const totalBytes=expSize+savSize+goldSize+userSize+imgSize+10485760;
-  const totalMB=totalBytes/1048576;
-  return{
-    expCount:exp.length,
-    savCount:sav.length,
-    goldCount:gold.length,
-    userCount:users.length,
-    totalRecords:exp.length+sav.length+gold.length,
-    estimatedMB:totalMB,
-    usedPercent:(totalMB/500)*100,
-    remainingMB:500-totalMB
-  };
+function showRegister(){
+  mdl('Create New Account',`<div style="display:flex;flex-direction:column;gap:14px">
+    <p style="color:var(--dim);font-size:13px;background:rgba(6,182,212,0.05);padding:10px;border-radius:6px;border:1px solid rgba(6,182,212,0.15)">
+      📝 Register to create your personal finance account
+    </p>
+    <div><label>Full Name</label><input id="regName" placeholder="John Doe"/></div>
+    <div><label>Email (for password recovery)</label><input type="email" id="regEmail" placeholder="your@email.com"/></div>
+    <div><label>Username</label><input id="regUser" placeholder="Choose username"/></div>
+    <div><label>Password</label><input type="password" id="regPass" placeholder="Min 4 characters"/></div>
+    <div><label>Confirm Password</label><input type="password" id="regPassConf" placeholder="Re-enter password"/></div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeMdl();showLoginPage()" style="flex:1">Back to Login</button>
+      <button class="btn btn-primary" onclick="doRegister()" style="flex:1">Register</button>
+    </div>
+  </div>`);
 }
 
-function rStorage(){
-  const stats=calcStorage();
-  const months=['Jan','Feb','Mar','Apr','May','Jun'];
-  const data=[12,15,18,20,22,stats.estimatedMB];
+async function doRegister(){
+  const name=document.getElementById('regName').value.trim();
+  const email=document.getElementById('regEmail').value.trim().toLowerCase();
+  const username=document.getElementById('regUser').value.trim().toLowerCase();
+  const pass=document.getElementById('regPass').value;
+  const passConf=document.getElementById('regPassConf').value;
   
-  let h=`<div class="metrics">
-    <div class="metric cyan"><div class="metric-top"></div><div class="metric-label">Total Records</div><div class="metric-value">${stats.totalRecords}</div><div class="metric-sub">All entries</div></div>
-    <div class="metric purple"><div class="metric-top"></div><div class="metric-label">Storage Used</div><div class="metric-value">${stats.estimatedMB.toFixed(1)} MB</div><div class="metric-sub">Out of 500 MB</div></div>
-    <div class="metric green"><div class="metric-top"></div><div class="metric-label">Space Left</div><div class="metric-value">${stats.remainingMB.toFixed(0)} MB</div><div class="metric-sub">${(100-stats.usedPercent).toFixed(1)}% free</div></div>
-    <div class="metric amber"><div class="metric-top"></div><div class="metric-label">Can Store</div><div class="metric-value">${Math.floor(stats.remainingMB*1000/150)}K</div><div class="metric-sub">More records</div></div>
-  </div>`;
+  if(!name||!email||!username||!pass){
+    alert('Please fill all fields');
+    return;
+  }
   
-  h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--cyan)">💾 Storage Usage</h3><div class="progress-ring"><svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="54"/><circle class="fill" cx="60" cy="60" r="54" stroke-dasharray="${2*Math.PI*54}" stroke-dashoffset="${2*Math.PI*54*(1-stats.usedPercent/100)}"/></svg><div class="progress-ring-text">${stats.usedPercent.toFixed(1)}%</div></div><div style="text-align:center;margin-top:16px;color:var(--dim);font-size:13px">Using ${stats.estimatedMB.toFixed(1)} MB of 500 MB</div></div>`;
+  if(pass.length<4){
+    alert('Password must be at least 4 characters');
+    return;
+  }
   
-  h+=`<div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--cyan)">📊 Record Breakdown</h3><div style="display:flex;flex-direction:column;gap:10px">
-    <div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">💳 Expenses</span><span style="font-weight:700;color:var(--red)">${stats.expCount}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">💰 Savings</span><span style="font-weight:700;color:var(--green)">${stats.savCount}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">🪙 Gold Items</span><span style="font-weight:700;color:var(--amber)">${stats.goldCount}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">👥 Users</span><span style="font-weight:700;color:var(--purple)">${stats.userCount}</span></div>
-  </div></div></div>`;
+  if(pass!==passConf){
+    alert('Passwords do not match');
+    return;
+  }
   
-  h+=`<div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--cyan)">📈 Growth Trend (6 Months)</h3><canvas id="growthChart" height="200"></canvas></div>`;
+  if(!email.includes('@')){
+    alert('Enter valid email address');
+    return;
+  }
   
-  h+=`<div class="card" style="background:linear-gradient(135deg,rgba(6,182,212,0.05),rgba(139,92,246,0.05))"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--purple)">ℹ️ Storage Info</h3><div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--dim)">
-    <div>📦 <strong>Database Location:</strong> Supabase (Japan)</div>
-    <div>💾 <strong>Backup:</strong> Automatic daily backups</div>
-    <div>🔐 <strong>Security:</strong> Encrypted & private</div>
-    <div>♾️ <strong>Free Tier Limit:</strong> 500 MB (~100K records)</div>
-    <div>⏱️ <strong>Average Record Size:</strong> Expense: 150 bytes, Savings: 150 bytes, Gold: 200 bytes</div>
-    <div>📊 <strong>Estimated Capacity Left:</strong> Can store ${Math.floor(stats.remainingMB*1000/150).toLocaleString()} more expense records</div>
-  </div></div>`;
+  show();
+  const{data:exists}=await sb.from('users').select('id').eq('username',username).single();
+  if(exists){
+    hide();
+    alert('Username already taken. Please choose a different one.');
+    return;
+  }
   
-  document.getElementById('pStorage').innerHTML=h;
+  const{error}=await sb.from('users').insert([{
+    id:genId(),
+    name:name,
+    username:username,
+    password:pass,
+    avatar:name[0].toUpperCase(),
+    profile_image:'',
+    role:'user',
+    email:email
+  }]);
   
-  setTimeout(()=>{
-    const ctx=document.getElementById('growthChart');
-    if(!ctx||!window.Chart)return;
-    if(growthChart)growthChart.destroy();
-    growthChart=new Chart(ctx,{type:'line',data:{labels:months,datasets:[{label:'Storage (MB)',data:data,borderColor:' #06b6d4',backgroundColor:'rgba(6,182,212,0.1)',borderWidth:3,tension:0.4,fill:true,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:'#06b6d4',pointBorderColor:'#fff',pointBorderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{color:'#475569',font:{size:12,weight:'600'},padding:10}},tooltip:{backgroundColor:'#fff',titleColor:'#0f172a',bodyColor:'#475569',borderColor:'#e2e8f0',borderWidth:2,padding:12}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{color:'#94a3b8',callback:v=>v+' MB'}},x:{grid:{display:false},ticks:{color:'#94a3b8'}}}}});
-  },100);
+  hide();
+  
+  if(error){
+    alert('Registration failed: '+error.message);
+    return;
+  }
+  
+  closeMdl();
+  toast('✅ Account created! Please sign in');
+  document.getElementById('loginUser').value=username;
+  document.getElementById('loginErr').style.display='none';
 }
+
+function showLoginPage(){
+  closeMdl();
+  document.getElementById('loginUser').value='';
+  document.getElementById('loginPass').value='';
+  document.getElementById('loginErr').style.display='none';
+}
+
+async function forgotPass(){
+  mdl('Reset Password',`<div style="display:flex;flex-direction:column;gap:14px">
+    <p style="color:var(--dim);font-size:13px">Enter your email or username to reset your password</p>
+    <div><label>Email or Username</label><input id="forgotInput" placeholder="your@email.com or username"/></div>
+    <div id="secQues" style="display:none">
+      <label>Security Question: What's your first pet's name?</label>
+      <input id="secAns" placeholder="Answer (case-insensitive)"/>
+    </div>
+    <div id="newPassFields" style="display:none">
+      <div style="margin-bottom:12px"><label>New Password</label><input type="password" id="newPass" placeholder="Min 4 characters"/></div>
+      <div><label>Confirm New Password</label><input type="password" id="newPassConf" placeholder="Re-enter password"/></div>
+    </div>
+    <div id="fpResult" style="display:none;background:rgba(6,182,212,0.08);padding:12px;border-radius:8px;border:1px solid rgba(6,182,212,0.2)">
+      <div style="font-size:12px;color:var(--dim);margin-bottom:6px">✅ Your password:</div>
+      <div style="font-size:16px;font-weight:700;color:var(--cyan)" id="fpPass"></div>
+      <div style="margin-top:8px;font-size:11px;color:var(--muted)">Copy this and use it to sign in</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <button class="btn btn-ghost" onclick="closeMdl();showLoginPage()">Back to Login</button>
+      <button class="btn btn-primary" id="fpBtn" onclick="retrievePass()">Find Account</button>
+    </div>
+  </div>`);
+}
+
+async function retrievePass(){
+  const input=document.getElementById('forgotInput').value.trim().toLowerCase();
+  if(!input){
+    alert('Enter email or username');
+    return;
+  }
+  
+  show();
+  const{data}=await sb.from('users').select('*').or(`username.eq.${input},email.eq.${input}`).single();
+  hide();
+  
+  if(!data){
+    alert('❌ Account not found. Please check your email or username.');
+    return;
+  }
+  
+  document.getElementById('fpPass').textContent=data.password;
+  document.getElementById('fpResult').style.display='block';
+  document.getElementById('fpBtn').style.display='none';
+  document.getElementById('forgotInput').disabled=true;
+}
+
+function calcStorage(){const expSize=exp.length*150,savSize=sav.length*150,goldSize=gold.length*200,userSize=users.length*300,imgSize=users.filter(u=>u.profile_image).length*150000,totalBytes=expSize+savSize+goldSize+userSize+imgSize+10485760,totalMB=totalBytes/1048576;return{expCount:exp.length,savCount:sav.length,goldCount:gold.length,userCount:users.length,totalRecords:exp.length+sav.length+gold.length,estimatedMB:totalMB,usedPercent:(totalMB/500)*100,remainingMB:500-totalMB}}
+
+function rStorage(){const stats=calcStorage();const months=['Jan','Feb','Mar','Apr','May','Jun'];const data=[12,15,18,20,22,stats.estimatedMB];let h=`<div class="metrics"><div class="metric cyan"><div class="metric-top"></div><div class="metric-label">Total Records</div><div class="metric-value">${stats.totalRecords}</div><div class="metric-sub">All entries</div></div><div class="metric purple"><div class="metric-top"></div><div class="metric-label">Storage Used</div><div class="metric-value">${stats.estimatedMB.toFixed(1)} MB</div><div class="metric-sub">Out of 500 MB</div></div><div class="metric green"><div class="metric-top"></div><div class="metric-label">Space Left</div><div class="metric-value">${stats.remainingMB.toFixed(0)} MB</div><div class="metric-sub">${(100-stats.usedPercent).toFixed(1)}% free</div></div><div class="metric amber"><div class="metric-top"></div><div class="metric-label">Can Store</div><div class="metric-value">${Math.floor(stats.remainingMB*1000/150)}K</div><div class="metric-sub">More records</div></div></div>`;h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--cyan)">💾 Storage Usage</h3><div class="progress-ring"><svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="54"/><circle class="fill" cx="60" cy="60" r="54" stroke-dasharray="${2*Math.PI*54}" stroke-dashoffset="${2*Math.PI*54*(1-stats.usedPercent/100)}"/></svg><div class="progress-ring-text">${stats.usedPercent.toFixed(1)}%</div></div><div style="text-align:center;margin-top:16px;color:var(--dim);font-size:13px">Using ${stats.estimatedMB.toFixed(1)} MB of 500 MB</div></div>`;h+=`<div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--cyan)">📊 Breakdown</h3><div style="display:flex;flex-direction:column;gap:10px"><div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">💳 Expenses</span><span style="font-weight:700;color:var(--red)">${stats.expCount}</span></div><div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">💰 Savings</span><span style="font-weight:700;color:var(--green)">${stats.savCount}</span></div><div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">🪙 Gold</span><span style="font-weight:700;color:var(--amber)">${stats.goldCount}</span></div><div style="display:flex;justify-content:space-between;padding:10px;background:var(--hover);border-radius:8px"><span style="font-size:13px;font-weight:600">👥 Users</span><span style="font-weight:700;color:var(--purple)">${stats.userCount}</span></div></div></div></div>`;h+=`<div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--cyan)">📈 Growth (6 Months)</h3><canvas id="growthChart" height="200"></canvas></div>`;h+=`<div class="card" style="background:linear-gradient(135deg,rgba(6,182,212,0.05),rgba(139,92,246,0.05))"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--purple)">ℹ️ Storage Info</h3><div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--dim)"><div>📦 <strong>Location:</strong> Supabase (Japan)</div><div>💾 <strong>Backup:</strong> Daily automatic</div><div>🔐 <strong>Security:</strong> Encrypted</div><div>♾️ <strong>Limit:</strong> 500 MB (~100K records)</div><div>📊 <strong>Capacity Left:</strong> ${Math.floor(stats.remainingMB*1000/150).toLocaleString()} more records</div></div></div>`;document.getElementById('pStorage').innerHTML=h;setTimeout(()=>{const ctx=document.getElementById('growthChart');if(!ctx||!window.Chart)return;if(growthChart)growthChart.destroy();growthChart=new Chart(ctx,{type:'line',data:{labels:months,datasets:[{label:'Storage (MB)',data:data,borderColor:'#06b6d4',backgroundColor:'rgba(6,182,212,0.1)',borderWidth:3,tension:0.4,fill:true,pointRadius:5,pointBackgroundColor:'#06b6d4',pointBorderColor:'#fff',pointBorderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#475569',font:{size:11}}},tooltip:{backgroundColor:'#fff',titleColor:'#0f172a',bodyColor:'#475569',borderColor:'#e2e8f0',borderWidth:2,padding:10}},scales:{y:{beginAtZero:true,ticks:{color:'#94a3b8',callback:v=>v+' MB'}},x:{ticks:{color:'#94a3b8'}}}}})},100)}
 
 function rHome(){const m=new Date().toISOString().slice(0,7),te=exp.filter(e=>e.date.startsWith(m)),tt=te.reduce((s,e)=>s+Number(e.amount),0),at=exp.reduce((s,e)=>s+Number(e.amount),0),st=sav.reduce((s,r)=>s+Number(r.amount),0);let h=`<div class="metrics"><div class="metric cyan"><div class="metric-top"></div><div class="metric-label">This Month</div><div class="metric-value">${fmtS(tt)}</div><div class="metric-sub">${te.length} txns</div></div><div class="metric red"><div class="metric-top"></div><div class="metric-label">All Expenses</div><div class="metric-value">${fmtS(at)}</div><div class="metric-sub">${exp.length} total</div></div><div class="metric green"><div class="metric-top"></div><div class="metric-label">Savings</div><div class="metric-value">${fmtS(st)}</div><div class="metric-sub">${sav.length} records</div></div><div class="metric purple"><div class="metric-top"></div><div class="metric-label">Gold</div><div class="metric-value">${gold.length}</div><div class="metric-sub">${gold.filter(g=>!g.sold).length} hold</div></div></div>`;const cm={};exp.forEach(e=>{cm[e.category]=(cm[e.category]||0)+Number(e.amount)});const cd=Object.entries(cm).sort((a,b)=>b[1]-a[1]).slice(0,8);h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--cyan)">📊 Breakdown</h3><canvas id="pc" height="200"></canvas></div>`;const rc=[...exp].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);h+=`<div class="card"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--cyan)">🕐 Recent</h3>${rc.length===0?'<div style="text-align:center;padding:30px;color:var(--muted);font-size:13px">No data</div>':rc.map(e=>{const c=CM[e.category]||CM.other;return`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:20px">${c.icon}</span><div style="flex:1"><div style="font-weight:600;font-size:13px">${c.label}</div><div style="font-size:11px;color:var(--muted)">${e.date}</div></div><div style="font-weight:700;color:var(--red);font-size:14px">${fmtS(e.amount)}</div></div>`}).join('')}</div></div>`;document.getElementById('pHome').innerHTML=h;if(window.Chart&&cd.length>0)setTimeout(()=>{const x=document.getElementById('pc');if(!x)return;if(pc)pc.destroy();pc=new Chart(x,{type:'doughnut',data:{labels:cd.map(([c])=>(CM[c]||CM.other).label),datasets:[{data:cd.map(([,v])=>v),backgroundColor:cd.map(([c])=>(CM[c]||CM.other).color),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:11},padding:8,color:'#475569'}},tooltip:{callbacks:{label:c=>` ${c.label}: ${fmt(c.parsed)}`}}}}})},50)}
 
 function rExp(){const mo=[...new Set(exp.map(e=>e.date.slice(0,7)))].sort().reverse();let h=`<div class="filter-bar"><input id="se" placeholder="🔍 Search" oninput="fExp()" style="flex:2"/><select id="cf" onchange="fExp()"><option value="all">All</option>${CATS.map(c=>`<option value="${c.id}">${c.icon} ${c.label}</option>`).join('')}</select><select id="mf" onchange="fExp()"><option value="">All Months</option>${mo.map(m=>`<option value="${m}">${m}</option>`).join('')}</select><input type="date" id="df" onchange="fExp()"/><button class="btn btn-primary" onclick="addE()">+</button><button class="btn btn-ghost" onclick="expXL()">📊</button><button class="btn btn-ghost" onclick="expPDF()">📄</button></div><div id="exl"></div>`;document.getElementById('pExp').innerHTML=h;fExp()}
-function fExp(){const s=(document.getElementById('se').value||'').toLowerCase(),c=document.getElementById('cf').value,m=document.getElementById('mf').value,d=document.getElementById('df').value,f=exp.filter(e=>(c==='all'||e.category===c)&&(!m||e.date.startsWith(m))&&(!d||e.date===d)&&(!s||(e.note||'').toLowerCase().includes(s)||(CM[e.category]?.label||'').toLowerCase().includes(s))).sort((a,b)=>b.date.localeCompare(a.date)),t=f.reduce((s,e)=>s+Number(e.amount),0);if(!f.length){document.getElementById('exl').innerHTML='<div class="card" style="text-align:center;padding:50px;color:var(--muted)"><div style="font-size:40px;margin-bottom:10px">📋</div>No expenses</div>';return}document.getElementById('exl').innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--border)"><span style="font-weight:600;font-size:13px">${f.length} transactions</span><span style="font-size:20px;font-weight:800;color:var(--red)">${fmt(t)}</span></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Category</th><th>Note</th><th>Amount</th><th>Actions</th></tr></thead><tbody>${f.map(e=>{const c=CM[e.category]||CM.other;return`<tr><td style="font-size:12px;font-weight:600">${e.date}</td><td><span class="badge cyan">${c.icon} ${c.label}</span></td><td style="font-size:13px">${e.note||'—'}</td><td style="font-weight:700;color:var(--red);font-size:14px">${fmt(e.amount)}</td><td><button onclick="edE('${e.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;padding:4px">✏️</button> <button onclick="delE('${e.id}')" style="background:none;border:none;color:var(--red);cursor:pointer;padding:4px">🗑</button></td></tr>`}).join('')}</tbody></table></div></div>`}
+function fExp(){const s=(document.getElementById('se').value||'').toLowerCase(),c=document.getElementById('cf').value,m=document.getElementById('mf').value,d=document.getElementById('df').value,f=exp.filter(e=>(c==='all'||e.category===c)&&(!m||e.date.startsWith(m))&&(!d||e.date===d)&&(!s||(e.note||'').toLowerCase().includes(s)||(CM[e.category]?.label||'').toLowerCase().includes(search))).sort((a,b)=>b.date.localeCompare(a.date)),t=f.reduce((s,e)=>s+Number(e.amount),0);if(!f.length){document.getElementById('exl').innerHTML='<div class="card" style="text-align:center;padding:50px;color:var(--muted)"><div style="font-size:40px;margin-bottom:10px">📋</div>No expenses</div>';return}document.getElementById('exl').innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--border)"><span style="font-weight:600;font-size:13px">${f.length} transactions</span><span style="font-size:20px;font-weight:800;color:var(--red)">${fmt(t)}</span></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Category</th><th>Note</th><th>Amount</th><th>Actions</th></tr></thead><tbody>${f.map(e=>{const c=CM[e.category]||CM.other;return`<tr><td style="font-size:12px;font-weight:600">${e.date}</td><td><span class="badge cyan">${c.icon} ${c.label}</span></td><td style="font-size:13px">${e.note||'—'}</td><td style="font-weight:700;color:var(--red);font-size:14px">${fmt(e.amount)}</td><td><button onclick="edE('${e.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;padding:4px">✏️</button> <button onclick="delE('${e.id}')" style="background:none;border:none;color:var(--red);cursor:pointer;padding:4px">🗑</button></td></tr>`}).join('')}</tbody></table></div></div>`}
 
 function addE(){mdl('Add Expense',`<div style="display:flex;flex-direction:column;gap:12px"><div><label>Date</label><input type="date" id="ed" value="${today()}"/></div><div><label>Category</label><select id="ec">${CATS.map(c=>`<option value="${c.id}">${c.icon} ${c.label}</option>`).join('')}</select></div><div><label>Amount</label><input type="number" id="ea" placeholder="0.00" step="0.01"/></div><div><label>Note</label><input id="en"/></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px"><button class="btn btn-ghost" onclick="closeMdl()">Cancel</button><button class="btn btn-primary" onclick="saveE()">Save</button></div></div>`)}
 async function saveE(){const a=document.getElementById('ea').value;if(!a||Number(a)<=0){alert('Enter amount');return}show();const{error}=await sb.from('expenses').insert([{id:genId(),user_id:cu,date:document.getElementById('ed').value,category:document.getElementById('ec').value,amount:Number(a),note:document.getElementById('en').value.trim()}]);hide();if(error){alert(error.message);return}closeMdl();await load();rExp();toast('✓ Added')}
@@ -208,20 +282,18 @@ function edG(id){const g=gold.find(x=>x.id===id);if(!g)return;mdl('Edit',`<div s
 async function upG(id){const n=document.getElementById('gn').value.trim(),w=document.getElementById('gw').value,a=document.getElementById('ga').value;if(!n||!w||!a){alert('Fill fields');return}const so=document.getElementById('gs').checked,sd=document.getElementById('gsd').value,sa=document.getElementById('gsa').value,l=so&&sa?(Number(a)-Number(sa)):0;show();await sb.from('gold_items').update({item_name:n,weight:Number(w),amount:Number(a),buy_date:document.getElementById('gbd').value,sold:so,sell_date:so?sd:null,sell_amount:so?Number(sa):null,loss_amount:l}).eq('id',id);hide();closeMdl();await load();rGold();toast('✓ Updated')}
 async function delG(id){if(!confirm('Delete?'))return;show();await sb.from('gold_items').delete().eq('id',id);hide();await load();rGold();toast('✓ Deleted')}
 
-function rUsers(){let h=`<div style="text-align:right;margin-bottom:16px"><button class="btn btn-primary" onclick="addU()">+ Create</button></div><div class="card"><div class="table-wrap">${users.length===0?'<div style="text-align:center;padding:50px;color:var(--muted)">No users</div>':`<table><thead><tr><th>Name</th><th>Username</th><th>Role</th><th></th></tr></thead><tbody>${users.map(u=>`<tr><td><div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:28px;height:28px;font-size:12px">${u.profile_image?`<img src="${u.profile_image}"/>`:(u.avatar||u.name[0])}</div><span style="font-weight:600;font-size:13px">${u.name}</span></div></td><td style="font-weight:600;font-size:12px">${u.username}</td><td><span class="badge ${u.role==='super'?'purple':'cyan'}">${u.role==='super'?'Super':'User'}</span></td><td><button onclick="edU('${u.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;padding:4px">✏️</button> ${u.id!=='admin'?`<button onclick="delU('${u.id}')" style="background:none;border:none;color:var(--red);cursor:pointer;padding:4px">🗑</button>`:''}</td></tr>`).join('')}</tbody></table>`}</div></div>`;document.getElementById('pUsers').innerHTML=h}
+function rUsers(){let h=`<div style="text-align:right;margin-bottom:16px"><button class="btn btn-primary" onclick="addU()">+ Create</button></div><div class="card"><div class="table-wrap">${users.length===0?'<div style="text-align:center;padding:50px;color:var(--muted)">No users</div>':`<table><thead><tr><th>Name</th><th>Username</th><th>Email</th><th>Role</th><th></th></tr></thead><tbody>${users.map(u=>`<tr><td><div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:28px;height:28px;font-size:12px">${u.profile_image?`<img src="${u.profile_image}"/>`:(u.avatar||u.name[0])}</div><span style="font-weight:600;font-size:13px">${u.name}</span></div></td><td style="font-weight:600;font-size:12px">${u.username}</td><td style="font-size:12px;color:var(--dim)">${u.email||'—'}</td><td><span class="badge ${u.role==='super'?'purple':'cyan'}">${u.role==='super'?'Super':'User'}</span></td><td><button onclick="edU('${u.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;padding:4px">✏️</button> ${u.id!=='admin'?`<button onclick="delU('${u.id}')" style="background:none;border:none;color:var(--red);cursor:pointer;padding:4px">🗑</button>`:''}</td></tr>`).join('')}</tbody></table>`}</div></div>`;document.getElementById('pUsers').innerHTML=h}
 
-function uForm(u,fn){const im=u.profile_image||'';return`<div style="display:flex;flex-direction:column;gap:12px"><div style="text-align:center"><div class="avatar" onclick="document.getElementById('pi').click()" style="width:80px;height:80px;font-size:32px;cursor:pointer;margin:0 auto;position:relative">${im?`<img src="${im}"/>`:(u.avatar||u.name[0]||'U')}<input type="file" id="pi" accept="image/*" onchange="hImg(event)" style="display:none"/><div style="position:absolute;bottom:0;right:0;width:28px;height:28px;background:var(--cyan);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer">📷</div></div><input type="hidden" id="uim" value="${im}"/></div><div><label>Name</label><input id="un" value="${u.name||''}"/></div><div><label>Username</label><input id="uu" value="${u.username||''}"/></div><div><label>Password</label><input type="password" id="up" value="${u.password||''}" placeholder="${!u.username?'Required':'Keep blank to keep'}"/></div><div><label>Avatar</label><input id="uav" value="${u.avatar||''}" maxlength="1"/></div><div><label>Role</label><select id="ur"><option value="user"${u.role==='user'?' selected':''}>User</option><option value="super"${u.role==='super'?' selected':''}>Super</option></select></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px"><button class="btn btn-ghost" onclick="closeMdl()">Cancel</button><button class="btn btn-primary" onclick="${fn}">Save</button></div></div>`}
+function uForm(u,fn){const im=u.profile_image||'';return`<div style="display:flex;flex-direction:column;gap:12px"><div style="text-align:center"><div class="avatar" onclick="document.getElementById('pi').click()" style="width:80px;height:80px;font-size:32px;cursor:pointer;margin:0 auto;position:relative">${im?`<img src="${im}"/>`:(u.avatar||u.name[0]||'U')}<input type="file" id="pi" accept="image/*" onchange="hImg(event)" style="display:none"/><div style="position:absolute;bottom:0;right:0;width:28px;height:28px;background:var(--cyan);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer">📷</div></div><input type="hidden" id="uim" value="${im}"/></div><div><label>Name</label><input id="un" value="${u.name||''}"/></div><div><label>Email</label><input type="email" id="uemail" value="${u.email||''}" placeholder="for password recovery"/></div><div><label>Username</label><input id="uu" value="${u.username||''}"/></div><div><label>Password</label><input type="password" id="up" value="${u.password||''}" placeholder="${!u.username?'Required':'Keep blank to keep'}"/></div><div><label>Avatar</label><input id="uav" value="${u.avatar||''}" maxlength="1"/></div><div><label>Role</label><select id="ur"><option value="user"${u.role==='user'?' selected':''}>User</option><option value="super"${u.role==='super'?' selected':''}>Super</option></select></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px"><button class="btn btn-ghost" onclick="closeMdl()">Cancel</button><button class="btn btn-primary" onclick="${fn}">Save</button></div></div>`}
 function hImg(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{document.getElementById('uim').value=ev.target.result;const i=document.querySelector('.modal .avatar img');i?i.src=ev.target.result:document.querySelector('.modal .avatar').innerHTML=`<img src="${ev.target.result}"/>`};r.readAsDataURL(f)}
-function addU(){mdl('Create User',uForm({id:'',name:'',username:'',password:'',role:'user',avatar:''},'saveU()'))}
+function addU(){mdl('Create User',uForm({id:'',name:'',username:'',password:'',email:'',role:'user',avatar:''},'saveU()'))}
 function edU(id){const u=users.find(x=>x.id===id);if(!u)return;mdl('Edit',uForm(u,`upU('${id}')`))}
-async function saveU(){const n=document.getElementById('un').value.trim(),uu=document.getElementById('uu').value.trim().toLowerCase(),p=document.getElementById('up').value,av=document.getElementById('uav').value.trim().toUpperCase(),r=document.getElementById('ur').value,im=document.getElementById('uim').value;if(!n||!uu||!p||p.length<4){alert('Fill all, pwd min 4');return}const{data:ex}=await sb.from('users').select('id').eq('username',uu).single();if(ex){alert('Username exists');return}show();await sb.from('users').insert([{id:genId(),name:n,username:uu,password:p,avatar:av||n[0],profile_image:im,role:r}]);hide();closeMdl();const{data}=await sb.from('users').select('*');if(data)users=data;rUsers();toast('✓ Created')}
-async function upU(id){const n=document.getElementById('un').value.trim(),uu=document.getElementById('uu').value.trim().toLowerCase(),p=document.getElementById('up').value,av=document.getElementById('uav').value.trim().toUpperCase(),r=document.getElementById('ur').value,im=document.getElementById('uim').value;if(!n||!uu){alert('Fill name/username');return}if(p&&p.length<4){alert('Pwd min 4');return}const{data:ex}=await sb.from('users').select('id').eq('username',uu).neq('id',id).single();if(ex){alert('Username exists');return}show();const ud={name:n,username:uu,avatar:av||n[0],profile_image:im,role:id==='admin'?'super':r};if(p)ud.password=p;await sb.from('users').update(ud).eq('id',id);hide();closeMdl();const{data}=await sb.from('users').select('*');if(data)users=data;rUsers();updateUI();toast('✓ Updated')}
+async function saveU(){const n=document.getElementById('un').value.trim(),uu=document.getElementById('uu').value.trim().toLowerCase(),p=document.getElementById('up').value,em=document.getElementById('uemail').value.trim().toLowerCase(),av=document.getElementById('uav').value.trim().toUpperCase(),r=document.getElementById('ur').value,im=document.getElementById('uim').value;if(!n||!uu||!p||p.length<4){alert('Fill all, pwd min 4');return}const{data:ex}=await sb.from('users').select('id').eq('username',uu).single();if(ex){alert('Username exists');return}show();await sb.from('users').insert([{id:genId(),name:n,username:uu,password:p,email:em,avatar:av||n[0],profile_image:im,role:r}]);hide();closeMdl();const{data}=await sb.from('users').select('*');if(data)users=data;rUsers();toast('✓ Created')}
+async function upU(id){const n=document.getElementById('un').value.trim(),uu=document.getElementById('uu').value.trim().toLowerCase(),p=document.getElementById('up').value,em=document.getElementById('uemail').value.trim().toLowerCase(),av=document.getElementById('uav').value.trim().toUpperCase(),r=document.getElementById('ur').value,im=document.getElementById('uim').value;if(!n||!uu){alert('Fill name/username');return}if(p&&p.length<4){alert('Pwd min 4');return}const{data:ex}=await sb.from('users').select('id').eq('username',uu).neq('id',id).single();if(ex){alert('Username exists');return}show();const ud={name:n,username:uu,email:em,avatar:av||n[0],profile_image:im,role:id==='admin'?'super':r};if(p)ud.password=p;await sb.from('users').update(ud).eq('id',id);hide();closeMdl();const{data}=await sb.from('users').select('*');if(data)users=data;rUsers();updateUI();toast('✓ Updated')}
 async function delU(id){if(id==='admin')return;if(!confirm('Delete?'))return;show();await sb.from('users').delete().eq('id',id);hide();const{data}=await sb.from('users').select('*');if(data)users=data;rUsers();toast('✓ Deleted')}
 
-async function doLogin(){const u=document.getElementById('loginUser').value.trim().toLowerCase(),p=document.getElementById('loginPass').value,er=document.getElementById('loginErr');if(!u||!p){er.textContent='Enter credentials';er.style.display='block';return}show();const{data}=await sb.from('users').select('*').eq('username',u).single();hide();if(!data){er.textContent='❌ Not found';er.style.display='block';return}if(data.password!==p){er.textContent='❌ Wrong password';er.style.display='block';return}cu=data.id;localStorage.setItem('cu',cu);localStorage.setItem('li','1');document.getElementById('loginPage').style.display='none';document.getElementById('app').style.display='flex';await load();updateUI();goTo('home');toast('✓ Welcome')}
+async function doLogin(){const u=document.getElementById('loginUser').value.trim().toLowerCase(),p=document.getElementById('loginPass').value,er=document.getElementById('loginErr');if(!u||!p){er.textContent='Enter credentials';er.style.display='block';return}show();const{data}=await sb.from('users').select('*').eq('username',u).single();hide();if(!data){er.textContent='❌ Not found';er.style.display='block';return}if(data.password!==p){er.textContent='❌ Wrong password';er.style.display='block';return}cu=data.id;localStorage.setItem('cu',cu);localStorage.setItem('li','1');document.getElementById('loginPage').style.display='none';document.getElementById('app').style.display='flex';await load();updateUI();goTo('home');toast('✓ Welcome, '+data.name)}
 function doLogout(){localStorage.clear();document.getElementById('um').style.display='none';document.getElementById('app').style.display='none';document.getElementById('loginPage').style.display='flex';cu='';exp=[];sav=[];gold=[];users=[]}
-async function forgotPass(){mdl('Forgot Password',`<div style="display:flex;flex-direction:column;gap:12px"><p style="color:var(--dim);font-size:13px">Enter username</p><div><label>Username</label><input id="fu"/></div><div id="fpr" style="display:none;background:rgba(6,182,212,0.08);padding:10px;border-radius:6px"><div style="font-size:12px;color:var(--dim)">Password:</div><div style="font-size:15px;font-weight:700;color:var(--cyan)" id="fpp"></div></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px"><button class="btn btn-ghost" onclick="closeMdl()">Close</button><button class="btn btn-primary" onclick="retP()">Get</button></div></div>`)}
-async function retP(){const u=document.getElementById('fu').value.trim().toLowerCase();if(!u){alert('Enter username');return}const{data}=await sb.from('users').select('password').eq('username',u).single();if(!data){alert('Not found');return}document.getElementById('fpp').textContent=data.password;document.getElementById('fpr').style.display='block'}
 
 async function init(){show();sb=window.supabase.createClient(SU,SK);const l=localStorage.getItem('li'),u=localStorage.getItem('cu');if(l&&u){const{data}=await sb.from('users').select('*');if(data){users=data;const usr=users.find(x=>x.id===u);if(usr){cu=u;document.getElementById('loginPage').style.display='none';document.getElementById('app').style.display='flex';await load();updateUI();goTo('home');return}}}document.getElementById('loginPage').style.display='flex';hide()}
 
