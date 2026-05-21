@@ -1,49 +1,21 @@
-apiVersion: apps/v1
+﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: finance-app
-namespace: default
-  labels:
-    app: finance-app
-    version: "1.0"
+  namespace: default
 spec:
   replicas: 2
   selector:
-    matchlabels:
+    matchLabels:
       app: finance-app
-  strategy:
-    type: RoliingUpdate
-    rollingUpdate: 
-      maxSurge: 1
-      maxUnavailable: 0
-  template: 
+  template:
     metadata:
       labels:
-         app: finance-app
-spec:
-  containers:
-    - name: finance-app
-      image: finance-app:latest
-      imagePullPolicy: Never
-      ports: 
-    - containerport: 80
-      resources:
-        requests:
-          memory: "64mi"
-          cpu: "100m"
-      limits:
-        memory: "128mi"
-        cpu: "200m"
-      livenessProbe:
-        httpGet:
-          path: /
-          port: 80
-      initialDelaySeconds: 10
-      periodSeconds: 15
-      readinessProbe:
-        httpGet:
-          path: /
-          port: 80
-          initialDelaySeconds: 5
-          PeriodSeconds: 10
-
+        app: finance-app
+    spec:
+      containers:
+      - name: finance-app
+        image: finance-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
