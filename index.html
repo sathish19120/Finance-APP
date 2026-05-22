@@ -272,7 +272,54 @@ function addU(){mdl('Create User (Admin)',uForm({id:'',name:'',username:'',passw
 function edU(id){const u=users.find(x=>x.id===id);if(!u)return;mdl('Edit User',uForm(u,`upU('${id}')`))}
 async function saveU(){const n=document.getElementById('un').value.trim(),uu=document.getElementById('uu').value.trim().toLowerCase(),p=document.getElementById('up').value,em=document.getElementById('uemail').value.trim().toLowerCase(),av=document.getElementById('uav').value.trim().toUpperCase(),r=document.getElementById('ur').value,im=document.getElementById('uim').value;if(!n||!uu||!p||p.length<4){alert('Fill all, pwd min 4');return}const{data:ex}=await sb.from('users').select('id').eq('username',uu).single();if(ex){alert('Username exists');return}show();await sb.from('users').insert([{id:genId(),name:n,username:uu,password:p,email:em,avatar:av||n[0],profile_image:im,role:r}]);hide();closeMdl();const{data}=await sb.from('users').select('*');if(data)users=data;rUsers();toast('✓ Created')}
 async function upU(id){const n=document.getElementById('un').value.trim(),uu=document.getElementById('uu').value.trim().toLowerCase(),p=document.getElementById('up').value,em=document.getElementById('uemail').value.trim().toLowerCase(),av=document.getElementById('uav').value.trim().toUpperCase(),r=document.getElementById('ur').value,im=document.getElementById('uim').value;if(!n||!uu){alert('Fill name/username');return}if(p&&p.length<4){alert('Pwd min 4');return}const{data:ex}=await sb.from('users').select('id').eq('username',uu).neq('id',id).single();if(ex){alert('Username exists');return}show();const ud={name:n,username:uu,email:em,avatar:av||n[0],profile_image:im,role:id==='admin'?'super':r};if(p)ud.password=p;await sb.from('users').update(ud).eq('id',id);hide();closeMdl();const{data}=await sb.from('users').select('*');if(data)users=data;rUsers();updateUI();toast('✓ Updated')}
-async function delU(id){if(id==='admin'){toast('⛔ Cannot delete admin');return}if(!confirm('Delete user?'))return;show();await sb.from('users').delete().eq('id',id);hide();const{data}=await sb.from('users').select('*');if(data)users=data;rUsers();toast('✓ Deleted')}
+async function delU(id){
+  if(id==='admin'){
+    toast('⛔ Cannot delete admin');
+    return;
+  }
+  
+  const userToDelete=users.find(u=>u.id===id);
+  if(!userToDelete){
+    toast('⛔ User not found');
+    return;
+  }
+  
+  if(!confirm(`Delete user "${userToDelete.name}"?\n\nThis will also delete:\n- All their expenses\n- All their savings\n- All their gold items\n- Their profile settings\n\nThis cannot be undone!`)){
+    return;
+  }
+  
+  show();
+  
+  // Delete user's data first (cascade)
+  try {
+    await sb.from('expenses').delete().eq('user_id',id);
+    await sb.from('savings').delete().eq('user_id',id);
+    await sb.from('gold_items').delete().eq('user_id',id);
+    await sb.from('savings_config').delete().eq('user_id',id);
+    
+    // Finally delete the user
+    const{error}=await sb.from('users').delete().eq('id',id);
+    
+    if(error){
+      hide();
+      alert('Error deleting user: '+error.message);
+      return;
+    }
+    
+    hide();
+    
+    // Reload users list
+    const{data}=await sb.from('users').select('*');
+    if(data)users=data;
+    
+    rUsers();
+    toast('✅ User and all data deleted');
+    
+  } catch(err) {
+    hide();
+    alert('Error: '+err.message);
+  }
+}
 
 function showRegister(){mdl('Create New Account',`<div style="display:flex;flex-direction:column;gap:14px"><p style="color:var(--dim);font-size:13px;background:rgba(6,182,212,0.05);padding:10px;border-radius:6px;border:1px solid rgba(6,182,212,0.15)">📝 Register to create your personal finance account</p><div><label>Full Name</label><input id="regName" placeholder="John Doe"/></div><div><label>Email</label><input type="email" id="regEmail" placeholder="your@email.com"/></div><div><label>Username</label><input id="regUser" placeholder="Choose username"/></div><div><label>Password</label><input type="password" id="regPass" placeholder="Min 4 characters"/></div><div><label>Confirm Password</label><input type="password" id="regPassConf" placeholder="Re-enter"/></div><div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-ghost" onclick="closeMdl();showLoginPage()" style="flex:1">Back</button><button class="btn btn-primary" onclick="doRegister()" style="flex:1">Register</button></div></div>`)}
 
