@@ -139,16 +139,56 @@ function rBills(){
     <div class="metric green"><div class="metric-top"></div><div class="metric-label">Paid</div><div class="metric-value">${paid}</div><div class="metric-sub">This period</div></div>
   </div>`;
   
-  h+=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-    <div style="display:flex;gap:8px">
-      <button class="btn ${filterStatus==='all'?'btn-primary':'btn-ghost'}" onclick="filterStatus='all';rBills()">All</button>
-      <button class="btn ${filterStatus==='pending'?'btn-primary':'btn-ghost'}" onclick="filterStatus='pending';rBills()">Pending</button>
-      <button class="btn ${filterStatus==='paid'?'btn-primary':'btn-ghost'}" onclick="filterStatus='paid';rBills()">Paid</button>
+  h+=`<div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+    <div style="display:flex;gap:8px;flex:1">
+      <button class="btn ${filterStatus==='all'?'btn-primary':'btn-ghost'}" onclick="filterStatus='all';rBills()" style="font-size:12px;padding:8px 14px">All</button>
+      <button class="btn ${filterStatus==='pending'?'btn-primary':'btn-ghost'}" onclick="filterStatus='pending';rBills()" style="font-size:12px;padding:8px 14px">Pending</button>
+      <button class="btn ${filterStatus==='paid'?'btn-primary':'btn-ghost'}" onclick="filterStatus='paid';rBills()" style="font-size:12px;padding:8px 14px">Paid</button>
     </div>
-    <button class="btn btn-primary" onclick="addBill()">+ Add Bill</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <input type="date" id="billDateFilter" onchange="rBills()" placeholder="Filter by date" style="width:auto;min-width:140px"/>
+      <select id="billMonthFilter" onchange="rBills()" style="width:auto;min-width:120px">
+        <option value="">All Months</option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <select id="billYearFilter" onchange="rBills()" style="width:auto;min-width:100px">
+        <option value="">All Years</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+      </select>
+      <button class="btn btn-primary" onclick="addBill()">+ Add Bill</button>
+    </div>
   </div>`;
   
-  const filtered=filterStatus==='all'?bills:bills.filter(b=>b.status===filterStatus);
+  const dateFilter=document.getElementById('billDateFilter')?.value||'';
+  const monthFilter=document.getElementById('billMonthFilter')?.value||'';
+  const yearFilter=document.getElementById('billYearFilter')?.value||'';
+  
+  let filtered=filterStatus==='all'?bills:bills.filter(b=>b.status===filterStatus);
+  
+  if(dateFilter){
+    filtered=filtered.filter(b=>b.due_date===dateFilter);
+  }
+  if(monthFilter){
+    filtered=filtered.filter(b=>b.due_date.slice(5,7)===monthFilter);
+  }
+  if(yearFilter){
+    filtered=filtered.filter(b=>b.due_date.slice(0,4)===yearFilter);
+  }
+  
   const sorted=[...filtered].sort((a,b)=>a.due_date.localeCompare(b.due_date));
   
   if(sorted.length===0){
